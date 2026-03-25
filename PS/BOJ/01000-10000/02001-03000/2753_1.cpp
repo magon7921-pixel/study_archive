@@ -13,7 +13,5 @@ int main() {
         else cout << "1";
     } else cout << "0";
 
-    // 좀 더 어려운 풀이 : cout << (!(n % 4) && n % 100 || !(n % 400));
-
     return 0;
 }
