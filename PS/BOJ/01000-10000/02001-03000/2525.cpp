@@ -3,17 +3,17 @@
 using namespace std;
 
 int main() {
-    int a, b, c;
+    int hour, min, cook_time;
 
-    cin >> a >> b >> c;
+    cin >> hour >> min >> cook_time;
 
-    a = a + (b + c) / 60;
-    b += c;
+    hour = hour + (min + cook_time) / 60;
+    min += cook_time;
 
-    if (b >= 60) {
-        if (a >= 24) cout << a % 24 << " " << b % 60;
-        else cout << a << " " << b % 60;
-    } else cout << a << " " << b;
+    if (min >= 60) {
+        if (hour >= 24) cout << hour % 24 << " " << min % 60;
+        else cout << hour << " " << min % 60;
+    } else cout << hour << " " << min;
 
     return 0;
 }
