@@ -13,24 +13,26 @@ void bfs(matrix &v, int x, int y) {
     queue<pair<int, int>> q;
     q.push({x, y});
 
-    const int m = v.size();
-    const int n = v[0].size();
+    int m = v.size();
+    int n = v[0].size();
+
+    v[x][y] = false;
 
     while(!q.empty()) {
-        const int x = q.front().first;
-        const int y = q.front().second;
-
-        v[x][y] = false;
+        int x = q.front().first;
+        int y = q.front().second;
 
         for (int i = 0; i < 4; i++) {
-            const int nx = x + dx[i];
-            const int ny = y + dy[i];
+            int nx = x + dx[i];
+            int ny = y + dy[i];
 
-            if (nx < 0 || nx > m || ny < 0 || ny > n)
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n)
                 continue;
                     
-            if (v[nx][ny])
+            if (v[nx][ny]) {
                 q.push({nx, ny});
+                v[nx][ny] = false;
+            }
         }
 
         q.pop();
@@ -48,7 +50,7 @@ int main() {
         int m, n, k;
         int cnt = 0;
         cin >> m >> n >> k;
-        matrix v(m, vector<bool>(n, 0));
+        matrix v(m, vector<bool>(n, false));
 
         for (int j = 0; j < k; j++) {
             int x, y;
@@ -56,10 +58,10 @@ int main() {
             v[x][y] = true;
         }
 
-        for (int j = 0; j < m; j++) {
-            for (int k = 0; k < n; k++) {
-                if (v[j][k]) {
-                    bfs(v, j, k);
+        for (int x = 0; x < m; x++) {
+            for (int y = 0; y < n; y++) {
+                if (v[x][y]) {
+                    bfs(v, x, y);
                     cnt++;
                 }
             }
@@ -70,3 +72,5 @@ int main() {
 
     return 0;
 }
+
+// dfs bfs할땐 방문 처리를 잘 합시다
